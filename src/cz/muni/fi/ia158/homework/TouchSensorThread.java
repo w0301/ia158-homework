@@ -14,8 +14,11 @@ public class TouchSensorThread extends Thread {
 		setDaemon(true);
 	}
 	
-	public boolean getValue() {
+	public boolean isTouched() {
 		return value;
+	}
+	
+	public void waitForReady() {
 	}
 	
 	@Override
