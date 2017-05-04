@@ -12,6 +12,9 @@ public class MainClass {
 		final TouchSensorThread touchSensor = new TouchSensorThread();
 		touchSensor.start();
 		
+		final DistanceSensorThread distanceSensor = new DistanceSensorThread();
+		distanceSensor.start();
+		
 		final ArbitratorThread arbitrator = new ArbitratorThread(colorSensor, touchSensor);
 		arbitrator.start();
 		
