@@ -46,9 +46,6 @@ public class DetectLineBehavior implements Behavior {
 				
 				//arbitrator.getLeftMotor().waitComplete()
 				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-	
-				arbitrator.getLeftMotor().stop(true);
-				arbitrator.getRightMotor().stop(true);
 
 				turn = -turn;
 				if (Math.abs(turn) == 1) turn = 2 * turn;
@@ -59,11 +56,7 @@ public class DetectLineBehavior implements Behavior {
 				
 				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
 
-				if (suppressed) {
-					arbitrator.getLeftMotor().stop(true);
-					arbitrator.getRightMotor().stop(true);	
-				}
-				else {
+				if (!suppressed) {
 					arbitrator.getLeftMotor().rotate(-TURN_ANGLE / 2, true);
 					arbitrator.getRightMotor().rotate(TURN_ANGLE / 2, true);
 					
@@ -76,7 +69,7 @@ public class DetectLineBehavior implements Behavior {
 	@Override
 	public void suppress() {
 		suppressed = true;
-		//arbitrator.getLeftMotor().stop(true);
-		//arbitrator.getRightMotor().stop(true);
+		arbitrator.getLeftMotor().stop(true);
+		arbitrator.getRightMotor().stop(true);
 	}
 }

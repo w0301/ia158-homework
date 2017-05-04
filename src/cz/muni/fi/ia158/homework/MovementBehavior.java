@@ -29,13 +29,12 @@ public class MovementBehavior implements Behavior {
 			arbitrator.getLeftMotor().forward();
 			arbitrator.getRightMotor().forward();
 		}
-
-		arbitrator.getLeftMotor().stop(true); 
-	    arbitrator.getRightMotor().stop(true);
 	}
 
 	@Override
 	public void suppress() {
 		suppressed = true;
+		arbitrator.getLeftMotor().stop(true); 
+	    arbitrator.getRightMotor().stop(true);
 	}
 }
