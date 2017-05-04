@@ -7,28 +7,27 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.SampleProvider;
 
 public class ColorSensorThread extends Thread {
-	private volatile float value = 0;
-	private volatile float referenceValue = 0;
+	private volatile float valueR = 0;
+	private volatile float valueG = 0;
+	private volatile float valueB = 0;
+	private volatile float referenceR = 0;
+	private volatile float referenceG = 0;
+	private volatile float referenceB = 0;
 	
 	private final Semaphore readySemaphore = new Semaphore(0);
 	
 	private final EV3ColorSensor sensor = new EV3ColorSensor(SensorPort.S1);
-	private final SampleProvider sampleProvider = sensor.getRedMode();
+	private final SampleProvider sampleProvider = sensor.getRGBMode();
 	
 	public ColorSensorThread() {
 		setDaemon(true);
 	}
 	
-	public float getValue() {
-		return value;
-	}
-	
-	public float getReferenceValue() {
-		return referenceValue;
-	}
-	
 	public boolean isReferenceValue() {
-		return (Math.abs(value - referenceValue) / 1.0f) <= 0.2f;
+		float r = referenceR - valueR;
+		float g = referenceG - valueG;
+		float b = referenceB - valueB;
+		return Math.sqrt(r*r + g*g + b*b) <= 0.1;
 	}
 	
 	public void waitForReady() throws InterruptedException {
@@ -40,13 +39,17 @@ public class ColorSensorThread extends Thread {
 		float[] sample = new float[sampleProvider.sampleSize()];
 		
 		sampleProvider.fetchSample(sample, 0);
-		referenceValue = sample[0]; 
+		referenceR = sample[0];
+		referenceG = sample[1];
+		referenceB = sample[2];
 		
 		readySemaphore.release();
 
 		while (true) {
 			sampleProvider.fetchSample(sample, 0);
-			value = sample[0];
+			valueR = sample[0];
+			valueG = sample[1];
+			valueB = sample[2];
 		}
 	}
 }

@@ -10,20 +10,22 @@ public class MovementBehavior implements Behavior {
 	public MovementBehavior(ArbitratorThread arbitrator) {
 		this.arbitrator = arbitrator;
 	}
-	
+
 	@Override
 	public boolean takeControl() {
-		return true;
+		return !arbitrator.getColorSensor().isReferenceValue();
 	}
 
 	@Override
 	public void action() {
+		arbitrator.setDetectLineMode(DetectLineBehavior.Mode.TurningSearch);
+		
 		suppressed = false;
 		
 		arbitrator.getLeftMotor().setSpeed(300);
 		arbitrator.getRightMotor().setSpeed(300);
 		
-		while (!suppressed) {
+		while (!suppressed && !arbitrator.getColorSensor().isReferenceValue()) {
 			arbitrator.getLeftMotor().forward();
 			arbitrator.getRightMotor().forward();
 		}

@@ -12,6 +12,7 @@ public class ArbitratorThread extends Thread {
 	private final RegulatedMotor rightMotor = Motor.A;
 	
 	private Arbitrator arbitrator;
+	private DetectLineBehavior.Mode detectLineMode = DetectLineBehavior.Mode.InitSearch;
 	
 	public ArbitratorThread(ColorSensorThread colorSensor, TouchSensorThread touchSensor) {
 		this.colorSensor = colorSensor;
@@ -34,6 +35,14 @@ public class ArbitratorThread extends Thread {
 		return rightMotor;
 	}
 	
+	public DetectLineBehavior.Mode getDetectLineMode() {
+		return detectLineMode;
+	}
+
+	public void setDetectLineMode(DetectLineBehavior.Mode detectLineMode) {
+		this.detectLineMode = detectLineMode;
+	}
+
 	@Override
 	public void run() {
 		try {
@@ -44,10 +53,9 @@ public class ArbitratorThread extends Thread {
 			return;
 		}
 		
-		// TODO : prepare arbitrator
 		arbitrator = new Arbitrator(new Behavior[] {
+			new DetectLineBehavior(this),
 			new MovementBehavior(this),
-			new DetectLineBehavior(this),	
 			new DetectWallBehavior(this)
 		});
 		arbitrator.go();
