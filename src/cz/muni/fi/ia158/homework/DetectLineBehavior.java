@@ -64,11 +64,20 @@ public class DetectLineBehavior implements Behavior {
 				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
 				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;*/
 				
-				checkLeftAndRight(turn);
-				moveForward(initSearchMoveBy * 75);
-				checkLeftAndRight(turn);
+				int movedBy = 0;
+				while(movedBy < initSearchMoveBy) {
+					checkLeftAndRight(turn);
+					moveForward(2 * 100);
+					movedBy += 2;
+				}
+				
 				rotateRobot(TurningSide.LEFT, arbitrator.TURN_ANGLE);
-				moveForward(initSearchMoveBy * 75);
+				movedBy = 0;
+				while(movedBy < initSearchMoveBy) {
+					checkLeftAndRight(turn);
+					moveForward(2 * 100);
+					movedBy += 2;
+				}
 				initSearchMoveBy += 2;
 
 				//TODO pohyb po stvorcovej spirale
