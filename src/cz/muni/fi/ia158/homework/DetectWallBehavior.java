@@ -1,5 +1,6 @@
 package cz.muni.fi.ia158.homework;
 
+import cz.muni.fi.ia158.homework.DetectLineBehavior.Mode;
 import lejos.robotics.subsumption.Behavior;
 
 public class DetectWallBehavior implements Behavior {
@@ -16,16 +17,16 @@ public class DetectWallBehavior implements Behavior {
 
 	@Override
 	public void action() {
-		arbitrator.setDetectLineMode(DetectLineBehavior.Mode.GoAroundSearch);
+		arbitrator.setDetectLineMode(Mode.GoAroundSearch);
 
-		arbitrator.getLeftMotor().setSpeed(200);
-		arbitrator.getRightMotor().setSpeed(200);
+		arbitrator.getLeftMotor().setSpeed(arbitrator.MOTOR_SPEED);
+		arbitrator.getRightMotor().setSpeed(arbitrator.MOTOR_SPEED);
 
 		arbitrator.getLeftMotor().rotate(-450, true);
 		arbitrator.getRightMotor().rotate(-450);
 		
-		arbitrator.getLeftMotor().rotate(DetectLineBehavior.TURN_ANGLE, true);
-		arbitrator.getRightMotor().rotate(-DetectLineBehavior.TURN_ANGLE);
+		arbitrator.getLeftMotor().rotate(arbitrator.TURN_ANGLE, true);
+		arbitrator.getRightMotor().rotate(-arbitrator.TURN_ANGLE);
 	}
 
 	@Override

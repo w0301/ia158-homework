@@ -1,5 +1,6 @@
 package cz.muni.fi.ia158.homework;
 
+import cz.muni.fi.ia158.homework.DetectLineBehavior.Mode;
 import lejos.robotics.subsumption.Behavior;
 
 public class MovementBehavior implements Behavior {
@@ -18,13 +19,13 @@ public class MovementBehavior implements Behavior {
 
 	@Override
 	public void action() {
-		arbitrator.setDetectLineMode(DetectLineBehavior.Mode.TurningSearch);
+		arbitrator.setDetectLineMode(Mode.TurningSearch);
 		arbitrator.getTurningHistory().push(arbitrator.getRobotTurningSide());
 		
 		suppressed = false;
 		
-		arbitrator.getLeftMotor().setSpeed(300);
-		arbitrator.getRightMotor().setSpeed(300);
+		arbitrator.getLeftMotor().setSpeed(arbitrator.MOTOR_SPEED);
+		arbitrator.getRightMotor().setSpeed(arbitrator.MOTOR_SPEED);
 		
 		while (!suppressed && !arbitrator.getColorSensor().isReferenceValue()) {
 			arbitrator.getLeftMotor().forward();

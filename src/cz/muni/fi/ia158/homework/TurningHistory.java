@@ -40,7 +40,7 @@ public class TurningHistory {
 		int otherTurnsImpact = (1000 - lastTurnImpact) / (listHistory.size() - 1);
 		int sum = 0;
 		TurningSide lastTurn = listHistory.get(listHistory.size()-1);
-		for(int i = 0; i< listHistory.size()-2; i++){
+		for(int i = 0; i < listHistory.size()-2; i++){
 			if(listHistory.get(i) != lastTurn)
 				sum += otherTurnsImpact;
 		}
@@ -48,7 +48,7 @@ public class TurningHistory {
 	}
 	
 	public void push(TurningSide side){
-		if(listHistory.size() == MAX_HISTORY){
+		while(listHistory.size() >= MAX_HISTORY){
 			listHistory.remove(0);
 		}
 		listHistory.add(side);
