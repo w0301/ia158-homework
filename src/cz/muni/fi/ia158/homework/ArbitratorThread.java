@@ -18,7 +18,7 @@ public class ArbitratorThread extends Thread {
 	private TurningSide robotTurningSide = null;
 	private TurningHistory turningHistory = new TurningHistory();
 	
-	public final int TURN_ANGLE = 450;
+	public final int TURN_ANGLE = 400;
 	public final int MOTOR_SPEED = 300;
 	
 	public ArbitratorThread(ColorSensorThread colorSensor, TouchSensorThread touchSensor) {

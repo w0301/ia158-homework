@@ -57,7 +57,7 @@ public class DetectLineBehavior implements Behavior {
 				initSearchMoveBy += 1;
 			}
 			else if (arbitrator.getDetectLineMode() == Mode.GoAroundSearch) {
-				moveForward(270);
+				moveForward(400);
 				if (!suppressed) {
 					rotateRobot(TurningSide.LEFT, arbitrator.TURN_ANGLE / 4);
 				}
