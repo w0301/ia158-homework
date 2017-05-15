@@ -21,7 +21,7 @@ public class DetectLineBehavior implements Behavior {
 	
 	private volatile boolean suppressed = false;
 	private TurningSide turn = TurningSide.getRandom();
-	private int initSearchMoveBy = 2;
+	private int initSearchMoveBy = 1;
 	
 	public DetectLineBehavior(ArbitratorThread arbitrator) {
 		this.arbitrator = arbitrator;
@@ -66,19 +66,20 @@ public class DetectLineBehavior implements Behavior {
 				
 				int movedBy = 0;
 				while(movedBy < initSearchMoveBy) {
+					moveForward(400);
 					checkLeftAndRight(turn);
-					moveForward(2 * 100);
-					movedBy += 2;
+					movedBy += 1;
 				}
-				
 				rotateRobot(TurningSide.LEFT, arbitrator.TURN_ANGLE);
+				
 				movedBy = 0;
 				while(movedBy < initSearchMoveBy) {
+					moveForward(400);
 					checkLeftAndRight(turn);
-					moveForward(2 * 100);
-					movedBy += 2;
+					movedBy += 1;
 				}
-				initSearchMoveBy += 2;
+				rotateRobot(TurningSide.LEFT, arbitrator.TURN_ANGLE);
+				initSearchMoveBy += 1;
 
 				//TODO pohyb po stvorcovej spirale
 			}
