@@ -12,9 +12,6 @@ public class DetectLineBehavior implements Behavior {
 		GoAroundSearch
 	}
 	
-	/*public static final int TURN_ANGLE = 360;
-	public static final int MOTOR_SPEED = 300;*/
-	
 	private final static Random RANDOM = new Random();
 	
 	private final ArbitratorThread arbitrator;
@@ -39,31 +36,8 @@ public class DetectLineBehavior implements Behavior {
 		arbitrator.getLeftMotor().setSpeed(arbitrator.MOTOR_SPEED);
 		arbitrator.getRightMotor().setSpeed(arbitrator.MOTOR_SPEED);
 		
-		
 		while (!suppressed) {
 			if (arbitrator.getDetectLineMode() == Mode.InitSearch) {
-				/*arbitrator.setRobotTurningSide(turn);
-				
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-
-				turn = turn.getOpposite();
-				arbitrator.setRobotTurningSide(turn);
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-				
-				turn = turn.getOpposite();
-				arbitrator.setRobotTurningSide(turn);
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;*/
-				
 				int movedBy = 0;
 				while(movedBy < initSearchMoveBy) {
 					moveForward(400);
@@ -79,50 +53,18 @@ public class DetectLineBehavior implements Behavior {
 					movedBy += 1;
 				}
 				rotateRobot(TurningSide.LEFT, arbitrator.TURN_ANGLE);
+				
 				initSearchMoveBy += 1;
-
-				//TODO pohyb po stvorcovej spirale
 			}
 			else if (arbitrator.getDetectLineMode() == Mode.GoAroundSearch) {
-				/*arbitrator.getLeftMotor().rotate(270, true);
-				arbitrator.getRightMotor().rotate(270, true);
-				
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;*/
 				moveForward(270);
-
 				if (!suppressed) {
-					/*arbitrator.getLeftMotor().rotate(-TURN_ANGLE / 4, true);
-					arbitrator.getRightMotor().rotate(TURN_ANGLE / 4, true);
-					
-					while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;*/
 					rotateRobot(TurningSide.LEFT, arbitrator.TURN_ANGLE / 4);
 				}
 			}
 			else if(arbitrator.getDetectLineMode() == Mode.TurningSearch){
 				turn = arbitrator.getTurningHistory().predictSide();
 				checkLeftAndRight(turn);
-				
-				/*arbitrator.setRobotTurningSide(turn);
-				
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-
-				turn = turn.getOpposite();
-				arbitrator.setRobotTurningSide(turn);
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;
-				
-				turn = turn.getOpposite();
-				arbitrator.setRobotTurningSide(turn);
-				arbitrator.getLeftMotor().rotate(-turn.getInt() * TURN_ANGLE, true);
-				arbitrator.getRightMotor().rotate(turn.getInt() * TURN_ANGLE, true);
-				while (!suppressed && arbitrator.getLeftMotor().isMoving()) ;*/
 			}
 		}
 	}
@@ -154,32 +96,8 @@ public class DetectLineBehavior implements Behavior {
 	}
 	
 	private void checkLeftAndRight(TurningSide startingSide) {
-		/*arbitrator.setRobotTurningSide(startingSide);
-		arbitrator.getLeftMotor().rotate(-startingSide.getInt() * TURN_ANGLE, true);
-		arbitrator.getRightMotor().rotate(startingSide.getInt() * TURN_ANGLE, true);
-		while (!suppressed && arbitrator.getLeftMotor().isMoving() 
-				&& arbitrator.getRightMotor().isMoving()) {
-			// waiting
-		}*/
 		rotateRobot(startingSide, arbitrator.TURN_ANGLE);
-		
-		/*TurningHistory.TurningSide opposite = startingSide.getOpposite();
-		arbitrator.setRobotTurningSide(opposite);
-		arbitrator.getLeftMotor().rotate(-opposite.getInt() * 2 * TURN_ANGLE, true);
-		arbitrator.getRightMotor().rotate(opposite.getInt() * 2 * TURN_ANGLE, true);
-		while (!suppressed && arbitrator.getLeftMotor().isMoving() 
-				&& arbitrator.getRightMotor().isMoving()) {
-			// waiting
-		}*/
 		rotateRobot(startingSide.getOpposite(), 2 * arbitrator.TURN_ANGLE);
-		
-		/*arbitrator.setRobotTurningSide(startingSide);
-		arbitrator.getLeftMotor().rotate(-startingSide.getInt() * TURN_ANGLE, true);
-		arbitrator.getRightMotor().rotate(startingSide.getInt() * TURN_ANGLE, true);
-		while (!suppressed && arbitrator.getLeftMotor().isMoving() 
-				&& arbitrator.getRightMotor().isMoving()) {
-			// waiting
-		}*/
 		rotateRobot(startingSide, arbitrator.TURN_ANGLE);
 	}
 }
