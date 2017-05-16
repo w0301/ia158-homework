@@ -6,7 +6,7 @@ import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
 
 public class DistanceSensorThread extends Thread {
-	private static final int DEFAULT_BEEP_INTERVAL = 100;
+	private static final int DEFAULT_BEEP_INTERVAL = 2000;
 	
 	private final EV3IRSensor sensor = new EV3IRSensor(SensorPort.S3);
 	private final SampleProvider sampleProvider = sensor.getDistanceMode();
@@ -25,7 +25,7 @@ public class DistanceSensorThread extends Thread {
 			
 			float value = sample[0];
 			long currBeep = System.currentTimeMillis();
-			if (lastBeep - currBeep >= (long)(DEFAULT_BEEP_INTERVAL * (value / 50.0f))) {
+			if (currBeep - lastBeep >= (long)( DEFAULT_BEEP_INTERVAL  * Math.min(200.0f, value) / 200.0f) ) {
 				Sound.beep();
 				lastBeep = currBeep;
 			}

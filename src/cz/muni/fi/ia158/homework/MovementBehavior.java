@@ -19,8 +19,9 @@ public class MovementBehavior implements Behavior {
 
 	@Override
 	public void action() {
+		/*TurningSide side = arbitrator.getRobotTurningSide();
+		arbitrator.getTurningHistory().push(side);*/
 		arbitrator.setDetectLineMode(Mode.TurningSearch);
-		arbitrator.getTurningHistory().push(arbitrator.getRobotTurningSide());
 		
 		suppressed = false;
 		

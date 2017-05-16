@@ -27,7 +27,7 @@ public class TurningHistory {
 	
 	private List<TurningSide> listHistory = new ArrayList<TurningSide>();
 	private final static Random RANDOM = new Random();
-	private final static int MAX_HISTORY = 3;
+	public final static int MAX_HISTORY = 3;
 	
 	public TurningSide predictSide(){
 		if(listHistory.size() == 0){

@@ -1,7 +1,6 @@
 package cz.muni.fi.ia158.homework;
 
 import cz.muni.fi.ia158.homework.DetectLineBehavior.Mode;
-import cz.muni.fi.ia158.homework.TurningHistory.TurningSide;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.RegulatedMotor;
 import lejos.robotics.subsumption.Arbitrator;
@@ -15,8 +14,8 @@ public class ArbitratorThread extends Thread {
 	
 	private Arbitrator arbitrator;
 	private Mode detectLineMode = Mode.InitSearch;
-	private TurningSide robotTurningSide = null;
-	private TurningHistory turningHistory = new TurningHistory();
+	//private TurningSide robotTurningSide = null;
+	//private TurningHistory turningHistory = new TurningHistory();
 	
 	public final int TURN_ANGLE = 400;
 	public final int MOTOR_SPEED = 300;
@@ -50,21 +49,21 @@ public class ArbitratorThread extends Thread {
 		this.detectLineMode = detectLineMode;
 	}
 
-	public TurningHistory getTurningHistory() {
+	/*public TurningHistory getTurningHistory() {
 		return turningHistory;
 	}
 
 	public void setTurningHistory(TurningHistory turningHistory) {
 		this.turningHistory = turningHistory;
-	}
+	}*/
 	
-	public TurningSide getRobotTurningSide() {
+	/*public TurningSide getRobotTurningSide() {
 		return robotTurningSide;
 	}
 
 	public void setRobotTurningSide(TurningSide robotTurningSide) {
 		this.robotTurningSide = robotTurningSide;
-	}
+	}*/
 
 	@Override
 	public void run() {

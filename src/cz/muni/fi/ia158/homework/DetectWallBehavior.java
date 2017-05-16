@@ -18,6 +18,9 @@ public class DetectWallBehavior implements Behavior {
 	@Override
 	public void action() {
 		arbitrator.setDetectLineMode(Mode.GoAroundSearch);
+		/*for(int i = 0; i < TurningHistory.MAX_HISTORY; ++i) {
+			arbitrator.getTurningHistory().push(TurningSide.RIGHT);
+		}*/
 
 		arbitrator.getLeftMotor().setSpeed(arbitrator.MOTOR_SPEED);
 		arbitrator.getRightMotor().setSpeed(arbitrator.MOTOR_SPEED);
@@ -31,6 +34,7 @@ public class DetectWallBehavior implements Behavior {
 
 	@Override
 	public void suppress() {
-		
+		arbitrator.getLeftMotor().stop(true); 
+	    arbitrator.getRightMotor().stop(true);
 	}
 }
