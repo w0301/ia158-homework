@@ -4,6 +4,9 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3TouchSensor;
 import lejos.robotics.SampleProvider;
 
+/*
+ * Manages detecting the activation of the touch sensor.
+ */
 public class TouchSensorThread extends Thread {
 	private volatile boolean value = false;
 	

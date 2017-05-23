@@ -6,6 +6,9 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.SampleProvider;
 
+/*
+ * Manages the reference color and checking difference between colors.
+ */
 public class ColorSensorThread extends Thread {
 	private volatile float valueR = 0;
 	private volatile float valueG = 0;

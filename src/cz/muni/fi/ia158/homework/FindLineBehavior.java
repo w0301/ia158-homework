@@ -3,7 +3,10 @@ package cz.muni.fi.ia158.homework;
 import cz.muni.fi.ia158.homework.TurningHistory.TurningSide;
 import lejos.robotics.subsumption.Behavior;
 
-public class DetectLineBehavior implements Behavior {
+/*
+ * Behavior class for finding the colored line. It uses 3 different modes.
+ */
+public class FindLineBehavior implements Behavior {
 	public enum Mode {
 		InitSearch,
 		TurningSearch,
@@ -15,7 +18,7 @@ public class DetectLineBehavior implements Behavior {
 	private volatile boolean suppressed = false;
 	private int initSearchMoveBy = 1;
 	
-	public DetectLineBehavior(ArbitratorThread arbitrator) {
+	public FindLineBehavior(ArbitratorThread arbitrator) {
 		this.arbitrator = arbitrator;
 	}
 	
@@ -81,6 +84,9 @@ public class DetectLineBehavior implements Behavior {
 		arbitrator.getRightMotor().stop(true);
 	}
 	
+	/*
+	 * Moves robot forward, it rotates both motors for the specified number of angles.
+	 */
 	private boolean moveForward(int angle) {
 		arbitrator.getLeftMotor().rotate(angle, true);
 		arbitrator.getRightMotor().rotate(angle, true);
@@ -91,6 +97,9 @@ public class DetectLineBehavior implements Behavior {
 		return suppressed;
 	}
 	
+	/*
+	 * Rotates robot to specified side, motors are rotated by specified number of angles.
+	 */
 	private boolean rotateRobot(TurningSide side, int angle) {
 		arbitrator.getLeftMotor().rotate(-side.getInt() * angle, true);
 		arbitrator.getRightMotor().rotate(side.getInt() * angle, true);
@@ -101,6 +110,9 @@ public class DetectLineBehavior implements Behavior {
 		return suppressed;
 	}
 	
+	/*
+	 * Performs the look-left-and-right check for finding the colored line. It start with the specified side.
+	 */
 	private boolean checkLeftAndRight(TurningSide startingSide) {
 		if (rotateRobot(startingSide, ArbitratorThread.TURN_ANGLE)) return true;
 		if (rotateRobot(startingSide.getOpposite(), 2 * ArbitratorThread.TURN_ANGLE)) return true;

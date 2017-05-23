@@ -2,6 +2,9 @@ package cz.muni.fi.ia158.homework;
 
 import java.util.Random;
 
+/*
+ * Class for storing the last turning direction an "intelligent" prediction of next turn.
+ */
 public class TurningHistory {	
 	public enum TurningSide {
 		LEFT, RIGHT;

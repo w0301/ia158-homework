@@ -1,11 +1,14 @@
 package cz.muni.fi.ia158.homework;
 
-import cz.muni.fi.ia158.homework.DetectLineBehavior.Mode;
+import cz.muni.fi.ia158.homework.FindLineBehavior.Mode;
 import lejos.hardware.motor.Motor;
 import lejos.robotics.RegulatedMotor;
 import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
+/*
+ * Manages a behavior control system.
+ */
 public class ArbitratorThread extends Thread {
 	public static final int TURN_ANGLE = 400;
 	public static final int MOTOR_SPEED = 300;
@@ -75,8 +78,8 @@ public class ArbitratorThread extends Thread {
 		}
 		
 		arbitrator = new Arbitrator(new Behavior[] {
-			new DetectLineBehavior(this),
-			new MovementBehavior(this),
+			new FindLineBehavior(this),
+			new MoveForwardBehavior(this),
 			new DetectWallBehavior(this)
 		});
 		arbitrator.go();

@@ -2,6 +2,9 @@ package cz.muni.fi.ia158.homework;
 
 import lejos.hardware.Button;
 
+/*
+ * Main class of programm.
+ */
 public class MainClass {
 	public static void main(String[] args) throws InterruptedException {
 		final ColorSensorThread colorSensor = new ColorSensorThread();

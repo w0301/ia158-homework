@@ -1,8 +1,11 @@
 package cz.muni.fi.ia158.homework;
 
-import cz.muni.fi.ia158.homework.DetectLineBehavior.Mode;
+import cz.muni.fi.ia158.homework.FindLineBehavior.Mode;
 import lejos.robotics.subsumption.Behavior;
 
+/*
+ * Behavior class for reacting on pressed touch sensor.
+ */
 public class DetectWallBehavior implements Behavior {
 	private final ArbitratorThread arbitrator;
 	

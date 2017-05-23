@@ -1,14 +1,17 @@
 package cz.muni.fi.ia158.homework;
 
-import cz.muni.fi.ia158.homework.DetectLineBehavior.Mode;
+import cz.muni.fi.ia158.homework.FindLineBehavior.Mode;
 import lejos.robotics.subsumption.Behavior;
 
-public class MovementBehavior implements Behavior {
+/*
+ * Behavior class for moving the robot forward when the colored line is present under the sensor.
+ */
+public class MoveForwardBehavior implements Behavior {
 	private final ArbitratorThread arbitrator;
 		
 	private volatile boolean suppressed = false;
 	
-	public MovementBehavior(ArbitratorThread arbitrator) {
+	public MoveForwardBehavior(ArbitratorThread arbitrator) {
 		this.arbitrator = arbitrator;
 	}
 

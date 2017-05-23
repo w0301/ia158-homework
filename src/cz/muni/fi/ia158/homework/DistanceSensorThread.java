@@ -5,6 +5,9 @@ import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3IRSensor;
 import lejos.robotics.SampleProvider;
 
+/*
+ * Manages the frequency of the beeping noise according to distance value returned from IR sensor.
+ */
 public class DistanceSensorThread extends Thread {
 	private static final int DEFAULT_BEEP_INTERVAL = 2000;
 	
