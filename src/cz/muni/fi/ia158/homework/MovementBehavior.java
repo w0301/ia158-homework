@@ -19,14 +19,12 @@ public class MovementBehavior implements Behavior {
 
 	@Override
 	public void action() {
-		/*TurningSide side = arbitrator.getRobotTurningSide();
-		arbitrator.getTurningHistory().push(side);*/
 		arbitrator.setDetectLineMode(Mode.TurningSearch);
 		
 		suppressed = false;
 		
-		arbitrator.getLeftMotor().setSpeed(arbitrator.MOTOR_SPEED);
-		arbitrator.getRightMotor().setSpeed(arbitrator.MOTOR_SPEED);
+		arbitrator.getLeftMotor().setSpeed(ArbitratorThread.MOTOR_SPEED);
+		arbitrator.getRightMotor().setSpeed(ArbitratorThread.MOTOR_SPEED);
 		
 		while (!suppressed && !arbitrator.getColorSensor().isReferenceValue()) {
 			arbitrator.getLeftMotor().forward();

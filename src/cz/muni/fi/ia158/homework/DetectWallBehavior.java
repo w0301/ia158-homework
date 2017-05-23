@@ -18,18 +18,15 @@ public class DetectWallBehavior implements Behavior {
 	@Override
 	public void action() {
 		arbitrator.setDetectLineMode(Mode.GoAroundSearch);
-		/*for(int i = 0; i < TurningHistory.MAX_HISTORY; ++i) {
-			arbitrator.getTurningHistory().push(TurningSide.RIGHT);
-		}*/
 
-		arbitrator.getLeftMotor().setSpeed(arbitrator.MOTOR_SPEED);
-		arbitrator.getRightMotor().setSpeed(arbitrator.MOTOR_SPEED);
+		arbitrator.getLeftMotor().setSpeed(ArbitratorThread.MOTOR_SPEED);
+		arbitrator.getRightMotor().setSpeed(ArbitratorThread.MOTOR_SPEED);
 
 		arbitrator.getLeftMotor().rotate(-450, true);
 		arbitrator.getRightMotor().rotate(-450);
 		
-		arbitrator.getLeftMotor().rotate(arbitrator.TURN_ANGLE, true);
-		arbitrator.getRightMotor().rotate(-arbitrator.TURN_ANGLE);
+		arbitrator.getLeftMotor().rotate(ArbitratorThread.TURN_ANGLE, true);
+		arbitrator.getRightMotor().rotate(-ArbitratorThread.TURN_ANGLE);
 	}
 
 	@Override

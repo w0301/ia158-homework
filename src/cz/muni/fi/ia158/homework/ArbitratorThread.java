@@ -7,18 +7,18 @@ import lejos.robotics.subsumption.Arbitrator;
 import lejos.robotics.subsumption.Behavior;
 
 public class ArbitratorThread extends Thread {
+	public static final int TURN_ANGLE = 400;
+	public static final int MOTOR_SPEED = 300;
+	
 	private final ColorSensorThread colorSensor;
 	private final TouchSensorThread touchSensor;
 	private final RegulatedMotor leftMotor = Motor.B;
 	private final RegulatedMotor rightMotor = Motor.A;
+	private final TurningHistory turningHistory = new TurningHistory();
 	
 	private Arbitrator arbitrator;
-	private Mode detectLineMode = Mode.InitSearch;
-	//private TurningSide robotTurningSide = null;
-	//private TurningHistory turningHistory = new TurningHistory();
-	
-	public final int TURN_ANGLE = 400;
-	public final int MOTOR_SPEED = 300;
+	private volatile Mode detectLineMode = Mode.InitSearch;
+	private volatile int detectLineModeCount = 0;
 	
 	public ArbitratorThread(ColorSensorThread colorSensor, TouchSensorThread touchSensor) {
 		this.colorSensor = colorSensor;
@@ -40,30 +40,29 @@ public class ArbitratorThread extends Thread {
 	public RegulatedMotor getRightMotor() {
 		return rightMotor;
 	}
+
+	public TurningHistory getTurningHistory() {
+		return turningHistory;
+	}
 	
 	public Mode getDetectLineMode() {
 		return detectLineMode;
 	}
 
 	public void setDetectLineMode(Mode detectLineMode) {
-		this.detectLineMode = detectLineMode;
+		if (detectLineMode != this.detectLineMode) {
+			this.detectLineModeCount = 0;
+			this.detectLineMode = detectLineMode;
+		}
 	}
-
-	/*public TurningHistory getTurningHistory() {
-		return turningHistory;
-	}
-
-	public void setTurningHistory(TurningHistory turningHistory) {
-		this.turningHistory = turningHistory;
-	}*/
 	
-	/*public TurningSide getRobotTurningSide() {
-		return robotTurningSide;
+	public int getDetectLineModeCount() {
+		return detectLineModeCount;
 	}
-
-	public void setRobotTurningSide(TurningSide robotTurningSide) {
-		this.robotTurningSide = robotTurningSide;
-	}*/
+	
+	public void incDetectLineModeCount() {
+		detectLineModeCount += 1;
+	}
 
 	@Override
 	public void run() {
